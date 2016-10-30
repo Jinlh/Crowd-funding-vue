@@ -1,0 +1,71 @@
+{
+    "errno": 0, 
+    "result":  {
+            "typeId": 2, 
+            "typeName": "农业",
+            "area": "江西 鹰潭",
+            "completeStatus": 3, 
+            "showType": "01",
+            "imgSrc": "01.jpg", 
+            "title": "【0添加纯手工蛋黄酥】好吃到停不下来", 
+            "rasied": 0, 
+            "goal": "10000", 
+            "completeStatusText": "筹资中",
+            "completionRate": "0%",
+            "endTime": "2015-09-19",
+            "supporter": "9" ,
+            "generalRecommendation": "true",
+            "initiator": "小黄酥",
+            "details": ["02.jpg", "03.jpg", "04.jpg", "05.jpg","06.jpg","07.jpg"],
+            "returnn": [
+                {
+                    "price": 29,
+                    "supporter": 0,
+                    "info": "感谢您的支持，您将获得穿山甲型纯手工蛋黄酥黑芝麻一份500g，现做现发（新疆 内蒙等偏远地区请勿拍）",
+                    "src": "07.jpg",
+                    "freight": "包邮",
+                    "delivery": "项目成功结束后15天内"
+                },
+                 {
+                    "price": 29,
+                    "supporter": 0,
+                    "info": "感谢您的支持，您将获得穿山甲型纯手工蛋黄酥黑芝麻一份500g，现做现发（新疆 内蒙等偏远地区请勿拍）",
+                    "src": "07.jpg",
+                    "freight": "包邮",
+                    "delivery": "项目成功结束后15天内"
+                },
+                 {
+                    "price": 29,
+                    "supporter": 0,
+                    "info": "感谢您的支持，您将获得穿山甲型纯手工蛋黄酥黑芝麻一份500g，现做现发（新疆 内蒙等偏远地区请勿拍）",
+                    "src": "07.jpg",
+                    "freight": "包邮",
+                    "delivery": "项目成功结束后15天内"
+                },
+                 {
+                    "price": 86,
+                    "supporter": 0,
+                    "info": "感谢您的支持，您将获得穿山甲型纯手工蛋黄酥黑芝麻一份500g，现做现发（新疆 内蒙等偏远地区请勿拍）",
+                    "src": "07.jpg",
+                    "freight": "包邮",
+                    "delivery": "项目成功结束后15天内"
+                },
+                 {
+                    "price": 129,
+                    "supporter": 0,
+                    "info": "感谢您的支持，您将获得穿山甲型纯手工蛋黄酥黑芝麻一份750g，现做现发（新疆 内蒙等偏远地区请勿拍）",
+                    "src": "07.jpg",
+                    "freight": "包邮",
+                    "delivery": "项目成功结束后15天内"
+                },
+                 {
+                    "price": 169,
+                    "supporter": 0,
+                    "info": "感谢您的支持，您将获得穿山甲型纯手工蛋黄酥黑芝麻一份22500g，现做现发（新疆 内蒙等偏远地区请勿拍）",
+                    "src": "07.jpg",
+                    "freight": "包邮",
+                    "delivery": "项目成功结束后15天内"
+                }
+            ]
+         }
+}

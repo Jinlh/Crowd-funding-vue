@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, user-scalable=no" id="viewport">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="static/modules/css/app.css">
+	<link rel="stylesheet" href="static/modules/css/swiper-3.3.1.min.css">
+</head>
+<body>
+	<div id="app" class="app" v-on:click="publicEvent">
+		<div class="layer" id="layer"></div>
+		<section class="search-container" id="search-container">
+			<div class="input-container">
+				<input type="text" v-model="search" v-on:change="goSearch" placeholder="请输入关键字搜索"><a class="search-icon" id="search-submit" href="#/list"></a>
+			</div>
+			<div class="search-attrs">
+				<h5>属性</h5>
+				<ul class="clearfix">
+					<li v-for="item in attrs">
+						<a href="#/list/attrs/{{item.id}}" class="type-tab">{{item.title}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="search-type">
+				<h5>类型</h5>
+				<ul class="clearfix">
+					<li v-for="item in type">
+						<a href="#/list/type/{{item.id}}" class="type-tab">{{item.title}}</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<component v-bind:is="view" v-bind:ctype="type" v-bind:csearch="dealSearch"></component>
+		<footer class="footer">
+			<div class="footer-nav" id="footer-nav">
+				<a href="#/home" class="go-home"> <i></i>
+					首页
+				</a>
+				<a href="javascript:void(0)" class="initiate"><i></i></a>
+				<a href="#/investor" class="share"> <i></i>
+					投资人
+				</a>
+			</div>
+			<div class="login-bounced" id="login-bounced">
+				<h5>
+					提示
+					<i class="close"></i>
+				</h5>
+				<p>请先登录</p>
+				<button class="sureBtn"><a href="#/login" class="close">确定</a></button>
+			</div>
+		</footer>
+		<div>
+	<!-- 主页模版 -->
+	<script type="text/template" id="tpl_home">
+		<header class="header" id="header-main">
+			<div class="search"></div>
+			<h1>XXXX</h1>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section id="home" class="home">
+				<div class="home-nav" id="home-nav">
+					<ul class='clearfix'>
+						<li>
+							<a href="#/list">产品众筹</a><i></i>
+						</li>
+						<li>
+							<a href="#/news">新闻资讯</a>
+						</li>
+						<li>
+							<a href="#/sort">全部分类</a>
+						</li>
+					</ul>
+				</div>
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				        <div class="swiper-slide" style="width:100%;"><img src="img/banner/01.jpg" alt=""></div>
+				        <div class="swiper-slide" style="width:100%;"><img src="img/banner/02.jpg" alt=""></div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				</div>
+				<ul class="home-type clearfix">
+					<li v-for="item in maintype">
+						<a href="#/list/type/{{item.id}}">
+							<span>{{item.title}}</span>
+						</a>
+					</li>
+				</ul>
+				<div class="home-list-title">
+					<h3 class="h3-title">
+						最新创意
+						<a href="#/list">
+							更多产品项目<i class='arrow'></i>
+						</a>
+					</h3>
+				</div>
+				<ul class="home-tab clearfix">
+					<li><a href="javascript:void(0)">综合推荐</a></li>
+					<li><a href="#/list/r/11">推荐项目</a></li>
+					<li><a href="#/list/r/12">正在预热</a></li>
+					<li><a href="#/list/r/13">最新上线</a></li>
+					<i></i>
+				</ul>
+				<div class="list-container">
+					<ul>
+						<li v-for="item in list" v-show="list">
+							<a href="#/product/{{item.id}}">
+								<img v-bind:src="'img/list/' + item.imgSrc" alt="">
+								<div class="description">
+									<h3>{{item.title}}</h3>
+									<h3 v-show="item.subtitle">{{item.subtitle}}</h3>
+									<p>
+										<span class="rasied">已筹资：</span><span class="rasied-text">¥{{item.rasied}}</span>
+										<span class="goal">目标：</span><span class="goal-text">¥{{item.goal}}</span>
+										<span class="completeStatusText" style="background: #c4c3c5" v-show='!item.completeStatus'>{{item.completeStatusText}}</span>
+										<span class="completeStatusText" style="background: #3a9b40" v-show='!!item.completeStatus'>{{item.completeStatusText}}</span>
+									</p>
+									<div class="process-container">
+										<div class="process" v-bind:style="{width:item.completionRate}"></div>
+									</div>
+									<div v-show="!item.completeStatus" class="countdown">
+										<span>离项目开始还有</span></br>
+										<span>01天12时28分29秒</span>
+									</div>
+									<ul  v-show="!!item.completeStatus" class="details clearfix">
+										<li><span v-text="item.completionRate"></span></br><span>已达</span></li>
+										<li><span>7天</span></br><span>剩余时间</span></li>
+										<li><span>{{item.supporter}}</span></br><span>支持者</span></li>
+									</ul>
+								</div>
+							</a>
+						</li>
+					</ul>
+					<div class="load-more" v-show="list.length">
+						<a href="#/list">
+							<span class="load-more-text">更多产品众筹</span>
+							<span class="arrow-gray">
+								<span class="arrow"></span>
+							</span>
+						</a>
+					</div>
+				</div>
+			</section>
+			<div class="slider" id="slider">
+				<span class="publish"></span>
+				<span class="go-top"></span>
+			</div>
+	</script>
+	<!-- 列表页模版 -->
+	<script type="text/template" id="tpl_list">
+		<header class="header">
+			<div class="search"></div>
+			<h1>XXXX</h1>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<div class="layer"></div>
+		<section class="list" id="list">
+			<div class="list-nav-container">
+				<div class="list-nav" id="list-nav">
+					<ul class="list-type clearfix">
+						<li v-for="item in sorts" v-on:click="showList" idx="{{item.id}}">
+							<span idx="{{item.id}}">{{item.value}}</span>
+							<span class="list-arrow" idx="{{item.id}}"></span>
+							<span class="list-arrow-orange" idx="{{item.id}}"></span>
+						</li>
+					</ul>
+					<div class="first-list type-list" v-show="listIndex == 1">
+						<ul class="list-left">
+						    <li><a href="javascript:void(0);" v-on:click="showAll">全部</a></li>
+							<li v-for="item in ctype.slice(0,10)"><a href="#/list/type/{{item.id}}" v-on:click="hideList">{{item.title}}</a></li>
+						</ul>
+						<ul class="list-right">
+							<li v-for="item in ctype.slice(0,10)"></li>
+						</ul>		
+					</div>
+					<div class="second-list type-list" v-show="listIndex == 2">
+							<ul class="list-left">
+								<li><a href="javascript:void(0);" v-on:click="showAll">全部</a></li>
+								<li v-for="item in city"><a href="#/list/city/{{item.id}}" v-on:click="hideList">{{item.value}}</a></li>
+							</ul>
+							<ul class="list-right">
+								<li v-for="item in city"></li>
+							</ul>	
+					</div>
+					<div class="third-list type-list" v-show="listIndex == 3">
+							<ul class="list-left">
+								<li><a href="javascript:void(0);" v-on:click="showAll">全部</a></li>
+								<li v-for="item in status"><a href="#/list/status/{{item.id}}" v-on:click="hideList">{{item.value}}</a></li>
+							</ul>
+							<ul class="list-right">
+								<li v-for="item in status"></li>
+							</ul>		
+					</div>
+				</div>
+			</div>
+			<div class="list-container">
+				<ul>
+					<li v-for="item in list | filterBy csearch" result="{{list | filterBy csearch}}">
+						<a href="#/product/{{item.id}}">
+							<img v-bind:src="'img/list/' + item.imgSrc" alt="">
+							<div class="description">
+								<h3>{{item.title}}</h3>
+								<h3 v-show="item.subtitle">{{item.subtitle}}</h3>
+								<p>
+									<span class="rasied">已筹资：</span><span class="rasied-text">¥{{item.rasied}}</span>
+									<span class="goal">目标：</span><span class="goal-text">¥{{item.goal}}</span>
+									<span class="completeStatusText" style="background: #c4c3c5" v-show='item.completeStatus===0 || item.completeStatus===3'>{{item.completeStatusText}}</span>
+									<span class="completeStatusText" style="background: #3a9b40" v-show='item.completeStatus===1 || item.completeStatus===2'>{{item.completeStatusText}}</span>
+								</p>
+								<div class="process-container">
+									<div class="process" v-bind:style="{width:item.completionRate}"></div>
+								</div>
+								<div v-show="!item.completeStatus" class="countdown">
+									<span>离项目开始还有</span></br>
+									<span>01天12时28分29秒</span>
+								</div>
+								<ul  v-show="!!item.completeStatus" class="details clearfix">
+									<li><span>{{item.completionRate}}</span></br><span>已达</span></li>
+									<li><span>7天</span></br><span>剩余时间</span></li>
+									<li><span>{{item.supporter}}</span></br><span>支持者</span></li>
+								</ul>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<div class="next" v-on:click="loadMore" v-show="isShow && list.length >= 10">下一页<span class="next-arrow"></span></div>
+			</div>
+		</section>
+		<div class="slider" id="slider">
+			<span class="publish"></span>
+			<span class="go-top"></span>
+		</div>	
+	</script>
+	<!-- 产品页组件模版 -->
+	<script type="text/template" id="tpl_product">
+		<header class="header" id="header-main">
+			<div class="search"></div>
+			<h1>XXXX</h1>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="product" id="product">
+			<div class="list-container">
+				<ul>
+					<li>
+						<a href="javasript:void(0)">
+							<img v-bind:src="'img/product/' + imgSrc">
+							<div class="description">
+								<h3>{{data.title}}</h3>
+								<h3 v-show="data.subtitle">{{data.subtitle}}</h3>
+								<p>
+									<span class="rasied">已筹资：</span><span class="rasied-text">¥{{data.rasied}}</span>
+									<span class="goal">目标：</span><span class="goal-text">¥{{data.goal}}</span>
+									<span class="completeStatusText" style="background: #c4c3c5" v-show='!data.completeStatus'>{{data.completeStatusText}}</span>
+									<span class="completeStatusText" style="background: #3a9b40" v-show='!!data.completeStatus'>{{data.completeStatusText}}</span>
+								</p>
+								<div class="process-container">
+									<div class="process" v-bind:style="{width:data.completionRate}"></div>
+								</div>
+								<div v-show="!data.completeStatus" class="countdown">
+									<span>离项目开始还有</span></br>
+									<span>01天12时28分29秒</span>
+								</div>
+								<ul  v-show="!!data.completeStatus" class="details clearfix">
+									<li><span>{{data.completionRate}}</span></br><span>已达</span></li>
+									<li><span>7天</span></br><span>剩余时间</span></li>
+									<li><span>{{data.supporter}}</span></br><span>支持者</span></li>
+								</ul>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="p-details">
+				<div class="p-detail-hd">
+					<span class="initiator">发起人：{{data.initiator}}</span>
+					<span class="follow"><i></i>关注</span>
+					<div class="switch-tab" v-show="!isShow"><span class="switch-core" v-on:click="showDetails">展示详情</span><span>&gt;&gt;</span></div>
+					<div class="switch-tab" v-show="isShow"><span class="switch-core" v-on:click="showDetails">收起详情</span><span class="point-bottom">&gt;&gt;</span></div>
+				</div>
+				<div class="p-detail-bd" v-show="isShow">
+					<div class="p-detail-img">
+						<div class="p-detail-info">
+							<p>{{data.title}}</p>
+							<P><span>发起人：{{data.initiator}}</span><span>地区：{{data.area}}</span><span>分类：{{data.typeName}}</span></p>
+						</div>
+						<p v-for="item in data.details"><img v-bind:src="'img/product/' + item"></p>
+						<div class="p-detail-ft">
+							如果您对项目有疑问，可以在此对项目发起人咨询<span class="ask">对发起人提问</span>
+						</div>
+					</div>
+					<div class="hide-details"><span v-on:click="showDetails">收起详情</span></div>
+				</div>
+			</div>
+			<div class="return-container">
+				<h5>选择回报</h5>
+				<div class="return" v-for="item in returnList">
+					<div class="return-hd">
+						<span class="r-money">¥{{item.price}}</span>
+						<span class="r-supporter">{{item.supporter}}人已支持</span>
+						<a class="like" href="#/login">立即支持</a>
+					</div>
+					<div class="return-bd">
+						<p class="con">{{item.info}}</p>
+						<p class="freight">运费：{{item.freight}}</p>
+						<p class="delivery">预计发放时间：{{item.delivery}}</p>
+						<p class="return-img"><img v-bind:src="'img/product/' + item.src"/></p>
+					</div>
+				</div>
+			</div>
+			<div class="load-more" v-on:click="loadMore" v-show="list.length > 3">
+				<a>
+					<span class="load-more-text sta1">查看其他全部回报</span>
+					<span class="load-more-text sta2 dis-n">收起其他回报</span>
+					<span class="arrow-gray sta1">
+						<span class="arrow"></span>
+					</span>
+					<span class="arrow-gray sta2 dis-n">
+						<span class="arrow"></span>
+					</span>
+				</a>
+			</div>
+		</section>
+	</script>
+	<!-- 登录页组件模版 -->
+	<script type="text/template" id="tpl_login">
+		<header class="header">
+			<div class="go-back"></div>
+			<h2>会员登录</h2>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="login-container">
+			<input type="text" placeholder="手机号/会员名/邮箱" class="username">
+			<input type="text" placeholder="输入登录密码" class="password">
+			<button type="button">登 录</button>
+			<a href="#/register">注册帐号</a>
+		</section>
+	</script>
+	<!-- 注册页模版 -->
+	<script type="text/template" id="tpl_register">
+		<header class="header">
+			<div class="go-back"></div>
+			<h2>会员注册</h2>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="register">
+		 	<ul>
+		 		<li><label>会员名称<input type="text" placeholder="请输入会员名称"></label></li>
+		 		<li><label>登录密码<input type="text" placeholder="请输入登录密码"></label></li>
+		 		<li><label>确认密码<input type="text" placeholder="请确认登录密码"></label></li>
+		 		<li><label>电子邮箱<input type="text" placeholder="请输入电子邮箱"></label></li>
+		 	</ul>
+			<button type="button">注 册</button>
+		</section>
+	</script>
+	<!--分类页模版 -->
+	<script type="text/template" id="tpl_sort">
+		<header class="header">
+			<div class="go-back"></div>
+			<h2>全部分类</h2>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="sort">
+			<div class="property"><div>产品众筹</div></div>
+			<h5>全部项目</h5>
+			<ul class="clearfix">
+				<li v-for="item in ctype"><a href="#/list/type/{{item.id}}">{{item.title}}</a></li>
+			</ul>
+		</section>
+	</script>
+	<!-- 投资人页模版 -->
+	<script type="text/template" id="tpl_investor">
+		<header class="header">
+			<div class="go-back"></div>
+			<h2>投资人列表</h2>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="investor">
+			<ul>
+				<li v-for="item in list">
+					<div class="icon"><img v-bind:src="'img/investor/' + item.src"></div>
+					<div class="brief"><span class="user">{{item.investor}}</span><span class="certification"></span>
+						<div class="address"><span v-show="!!item.address"><i></i><span>{{item.address}}</span> | </span><a href="javascript:void(0)">查看详细</a></div>
+						<div class="compose"><i></i>发送私信</span></div>
+					</div>
+					<div class="recommend">自荐我的项目</div>
+				</li>
+			</ul>
+		</section>
+	</script>
+	<!-- 新闻列表页模版 -->
+	<script type="text/template" id="tpl_news">
+		<header class="header">
+			<div class="search"></div>
+			<h1>XXXX</h1>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="news_list">
+			<ul>
+				<li v-for="item in list">
+					<a href="#/info/{{item.id}}">
+						<h3>{{item.title}}</h3>
+						<time class="muted">{{item.time}}</time>
+					</a>
+				</li>
+			</ul>
+			<div class="next" v-on:click="loadMore">下一页<span class="next-arrow"></span></div>
+		</section>
+	</script>
+	<!-- 新闻详情页模版 -->
+	<script type="text/template" id="tpl_info">
+		<header class="header">
+			<div class="go-back"></div>
+			<h2>新闻资讯</h2>
+			<div class="login">
+				<a href="#/login"></a>
+			</div>
+		</header>
+		<section class="news_info">
+			<div class="article_title">
+				<h3>{{title}}</h3>
+				<time class="muted">{{time}}</time>
+			</div>
+			<ul class="article_content">
+				<li v-for="item in paras">
+					<p v-show="!!item.type">&nbsp;{{item.content}}</p>
+					<div v-if="!item.type">
+					<img v-bind:src="'img/info/' + item.content" alt=""></div>
+				</li>
+			</ul>
+		</section>
+	</script>
+	<script type="text/javascript" src="static/mod.js"></script>
+	<script type="text/javascript" src="static/lib/1zepto.js"></script>
+	<script type="text/javascript" src="static/lib/2zepto.touch.js"></script>
+	<script type="text/javascript" src="static/lib/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/vue.js"></script>
+	<script type="text/javascript" src="static/modules/app.js"></script>
+	<script type="text/javascript">
+		require("static/modules/app");
+	</script>
+</body>
+</html>	

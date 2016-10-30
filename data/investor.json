@@ -1,0 +1,62 @@
+{
+    "errno": 0, 
+    "result":[
+         {
+            "typeId": 1, 
+            "id": 1024,
+            "src": "01.jpg",
+            "investor" : " 水泡_2193",
+            "address": "山东济南"
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "02.jpg",
+            "investor" : "13176353777",
+            "address": ""
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "03.jpg",
+            "investor" : "璐璐商务网17726680933",
+            "address": "重庆万州"
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "04.jpg",
+            "investor" : "ALEX",
+            "address": "上海"
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "01.jpg",
+            "investor" : "anguo999",
+            "address": ""
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "02.jpg",
+            "investor" : "合肥音特汽车音响改装",
+            "address": "安徽合肥"
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "03.jpg",
+            "investor" : "梦溪",
+            "address": ""
+         },
+         {
+            "typeId": 1, 
+            "id": 1024,
+             "src": "04.jpg",
+            "investor" : "优云网络·何倩_2528",
+            "address": "河北石家庄"
+         }
+          
+    ]
+}

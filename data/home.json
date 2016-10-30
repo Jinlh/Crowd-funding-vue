@@ -1,0 +1,73 @@
+{
+    "errno": 0, 
+    "result":[
+         {
+            "typeId": 1, 
+            "id": 1024,
+            "area": "北京",
+            "completeStatus": 0, 
+            "showType": "01",
+            "imgSrc": "01.jpg", 
+            "title": "冬日的早晨，一碗粥，一个蛋就是幸福！", 
+            "rasied": 0, 
+            "goal": "50000", 
+            "completeStatusText": "即将开始",
+            "completionRate": "0",
+            "endTime": "2016-06-29",
+            "supporter": "52" ,
+            "generalRecommendation": "true",
+            "Recommendation": "true"
+         },
+          {
+            "typeId": 2, 
+             "id": 102,
+            "area": "北京",
+            "completeStatus": 1, 
+            "showType": "01",
+            "imgSrc": "02.jpg", 
+            "title": "我不要做软柿子被你捏", 
+            "rasied": 4898, 
+            "goal": "10000", 
+            "completeStatusText": "筹资中",
+            "completionRate": "48.98%",
+            "endTime": "2016-06-29",
+            "supporter": "24" ,
+            "generalRecommendation": "true",
+            "Recommendation": "true"
+         },
+          {
+            "typeId": 3,
+             "id": 1035, 
+            "area": "北京",
+            "completeStatus": 1, 
+            "showType": "01",
+            "imgSrc": "03.jpg", 
+            "title": "小时候的酱油，小时候的味道", 
+            "rasied": 2784, 
+            "goal": "20000", 
+            "completeStatusText": "筹资中",
+            "completionRate": "13.92%",
+            "endTime": "2016-06-29",
+            "supporter": "61" ,
+            "generalRecommendation": "true",
+            "Recommendation": "true"
+         },
+          {
+            "typeId": 4, 
+             "id": 1027,
+            "area": "北京",
+            "completeStatus": 1, 
+            "showType": "01",
+            "imgSrc": "04.jpg", 
+            "title": "一只有色彩的盏", 
+            "rasied": 86460, 
+            "goal": "100000", 
+            "completeStatusText": "筹资中",
+            "completionRate": "86.46%",
+            "endTime": "2016-06-29",
+            "supporter": "52" ,
+            "generalRecommendation": "true",
+            "Recommendation": "true"
+         }
+    ]
+}
